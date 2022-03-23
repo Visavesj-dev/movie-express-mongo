@@ -1,8 +1,22 @@
 version: "3.9"
 
 services:
+  movie:
+    build: .
+    volumes:
+      - ./:/home/node/app
+      - ./.env:/home/node/app/dist/.env
+      - notused:/home/node/app/dist/
+    ports:
+      - 8000:3001
+    links:
+      - mongo
+    environment:
+      WAIT_HOSTS: mongo:27017
+    restart: always
   mongo:
-    image: mongo:4.4
+    image: mongo
+    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=20Scoops
       - MONGO_INITDB_ROOT_PASSWORD=20Scoops
@@ -10,3 +24,6 @@ services:
       - '27017:27017'
     volumes:
       - ./database/db:/data/db
+
+volumes:
+  notused:

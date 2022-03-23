@@ -26,7 +26,7 @@ const connectDB = async () => {
   );
 
   try {
-    await mongoose.connect("mongodb://localhost:27017/20Scoops", options);
+    await mongoose.connect("mongodb://mongo:27017/20Scoops", options);
     await mongoose.connection.startSession();
   } catch (err) {
     console.log("err", err);
